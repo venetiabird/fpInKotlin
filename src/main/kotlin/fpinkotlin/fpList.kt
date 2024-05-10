@@ -18,12 +18,19 @@ sealed class Lizt<out A> {
                 is Nil -> 1.0
                 is Cons ->
                     if (doubles.head == 0.0) 0.0
-                    else
-                        doubles.head * product(doubles.tail)
+                    else doubles.head * product(doubles.tail)
             }
 
     }
 }
-object Nil : Lizt<Nothing>()
-data class Cons<out A>(val head: A, val tail: Lizt<A>) : Lizt<A>()
 
+fun <A> Lizt<A>.tail(): Lizt<A> =
+    when (val lizt = this) {
+        is Nil -> Nil
+        is Cons -> lizt.tail
+    }
+
+
+object Nil : Lizt<Nothing>()
+
+data class Cons<out A>(val head: A, val tail: Lizt<A>) : Lizt<A>()

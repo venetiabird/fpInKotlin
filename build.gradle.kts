@@ -7,7 +7,7 @@ application {
     mainClass = "fpinkotlin.MainKt"
 }
 
-group = "org.example"
+group = "fpinkotlin"
 version = "1.0-SNAPSHOT"
 
 repositories {
