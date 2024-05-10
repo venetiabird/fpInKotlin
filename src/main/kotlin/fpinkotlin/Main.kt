@@ -1,4 +1,4 @@
-package org.example
+package fpinkotlin
 
 fun main() {
     println("Hello World!")

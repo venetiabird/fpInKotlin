@@ -1,4 +1,4 @@
-package org.example
+package fpinkotlin
 
 
 sealed class Lizt<out A> {
