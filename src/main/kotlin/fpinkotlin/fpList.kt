@@ -21,15 +21,42 @@ sealed class Lizt<out A> {
                     else doubles.head * product(doubles.tail)
             }
 
+        fun <A> getTail(l: Lizt<A>): Lizt<A> =
+            when (l) {
+                is Nil -> Nil
+                is Cons -> l.tail
+            }
+
+        // 3.2
+        fun <A> setHead(xs: Lizt<A>, x: A): Lizt<A> =
+            when (xs) {
+                is Nil -> Nil
+                is Cons -> Cons(x, xs.tail)
+            }
+
+        // 3.3
+        fun <A> drop(l: Lizt<A>, n: Int): Lizt<A> =
+            when (l) {
+                is Nil -> Nil
+                is Cons -> if (n == 0) l else drop(l.tail, n - 1)
+            }
+
+        // 3.4
+        fun <A> dropWhile(l: Lizt<A>, f: (A) -> Boolean): Lizt<A> =
+            when (l) {
+                is Nil -> Nil
+                is Cons -> if (!f(l.head)) l else dropWhile(l.tail, f)
+            }
+
     }
 }
 
-fun <A> Lizt<A>.tail(): Lizt<A> =
-    when (val lizt = this) {
-        is Nil -> Nil
-        is Cons -> lizt.tail
-    }
-
+// 3.1
+// fun <A> Lizt<A>.tail(): Lizt<A> =
+//     when (val lizt = this) {
+//         is Nil -> Nil
+//         is Cons -> lizt.tail
+//     }
 
 object Nil : Lizt<Nothing>()
 
