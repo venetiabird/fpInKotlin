@@ -48,6 +48,23 @@ sealed class Lizt<out A> {
                 is Cons -> if (!f(l.head)) l else dropWhile(l.tail, f)
             }
 
+        // 3.5
+        fun <A>init(l: Lizt<A>) : Lizt<A> =
+            when (l) {
+                is Nil -> l
+                is Cons -> if (l.tail is Nil) Nil else Cons(l.head, init(l.tail))
+            }
+
+        fun <A,B> foldRight(xs: Lizt<A>, z: B, f: (A, B) -> B): B =
+            when (xs) {
+                is Nil -> z
+                is Cons -> f(xs.head, foldRight(xs.tail, z, f))
+            }
+
+        fun productZ(dbs: Lizt<Double>): Double = foldRight(dbs, 1.0) { a, b ->
+            println("head ${a}, tail ${b}")
+            a * b
+        }
     }
 }
 

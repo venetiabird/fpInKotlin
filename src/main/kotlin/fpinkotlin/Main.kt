@@ -10,4 +10,6 @@ fun main() {
     println(Lizt.product(Lizt.of(1.0, 2.0)))
     println(Lizt.drop(Lizt.of(1, 4, 7, 2, 6, 8), 3))
     println(Lizt.dropWhile(Lizt.of(1, 4, 7, 2, 6, 8)) { n -> n != 7 })
+    println(Lizt.init(Lizt.of(1, 4, 7, 2, 6, 8)))
+    println(Lizt.productZ(Lizt.of(6.0, 0.0, 7.1)))
 }
