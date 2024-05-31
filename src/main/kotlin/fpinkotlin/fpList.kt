@@ -61,10 +61,32 @@ sealed class Lizt<out A> {
                 is Cons -> f(xs.head, foldRight(xs.tail, z, f))
             }
 
+        // 3.6
         fun productZ(dbs: Lizt<Double>): Double = foldRight(dbs, 1.0) { a, b ->
             println("head ${a}, tail ${b}")
             a * b
         }
+
+        fun <A> empty(): Lizt<A> = Nil
+
+        fun <A> length(xs: Lizt<A>): Int =
+            foldRight(xs, 0) { _, b -> b + 1}
+
+        tailrec fun <A, B> foldLeft(xs: Lizt<A>, z: B, f: (B, A) -> B): B =
+            when (xs) {
+                is Nil -> z
+                is Cons -> foldLeft(xs.tail, f(z, xs.head), f)
+            }
+
+        // 3.10
+        fun sumLeft(xs: Lizt<Int>): Int =
+            foldLeft(xs, 0) { b, a -> a + b }
+
+        fun productLeft(xs: Lizt<Double>): Double =
+            foldLeft(xs, 1.0) { b, a -> a * b }
+
+        fun <A> lengthLeft(xs: Lizt<A>): Int =
+            foldLeft(xs, 0) { b, _ -> b + 1 }
     }
 }
 

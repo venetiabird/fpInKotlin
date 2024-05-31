@@ -1,8 +1,8 @@
 package fpinkotlin
 
 fun main() {
-    val words = Lizt.of("apple", "banana", "strawberry")
-
+    val words = Lizt.of("apple", "banana", "strawberry", "peach")
+    val ints = Lizt.of(1, 4, 7, 2, 6, 8)
     println("Hello World!")
     println(Lizt.of(arrayOf(1, 2, 3)))
     println(Lizt.getTail(words))
@@ -12,4 +12,11 @@ fun main() {
     println(Lizt.dropWhile(Lizt.of(1, 4, 7, 2, 6, 8)) { n -> n != 7 })
     println(Lizt.init(Lizt.of(1, 4, 7, 2, 6, 8)))
     println(Lizt.productZ(Lizt.of(6.0, 0.0, 7.1)))
+    println(Lizt.foldRight(
+        Cons(1, Cons(2, Cons(3, Nil))),
+        Nil as Lizt<Int>
+    ) { x, y -> Cons(x, y) })
+    println(Lizt.lengthLeft(words))
+    println(Lizt.sumLeft(ints))
+    println(Lizt.productLeft(Lizt.of<Double>(1.0, 2.0, 3.0)))
 }
