@@ -19,4 +19,7 @@ fun main() {
     println(Lizt.lengthLeft(words))
     println(Lizt.sumLeft(ints))
     println(Lizt.productLeft(Lizt.of<Double>(1.0, 2.0, 3.0)))
+    println(Lizt.reverse(Lizt.of<Double>(1.0, 2.0, 3.0)))
+    println(Lizt.appendRight(Lizt.of<Double>(1.0, 2.0, 3.0), 4.0))
+    println(Lizt.concat(Lizt.of<Double>(1.0, 2.0, 3.0), Lizt.of<Double>(4.0, 5.0)))
 }

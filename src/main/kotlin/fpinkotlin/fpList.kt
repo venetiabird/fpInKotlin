@@ -63,10 +63,9 @@ sealed class Lizt<out A> {
 
         // 3.6
         fun productZ(dbs: Lizt<Double>): Double = foldRight(dbs, 1.0) { a, b ->
-            println("head ${a}, tail ${b}")
+            println("head ${a}, tail $b")
             a * b
         }
-
         fun <A> empty(): Lizt<A> = Nil
 
         fun <A> length(xs: Lizt<A>): Int =
@@ -87,6 +86,26 @@ sealed class Lizt<out A> {
 
         fun <A> lengthLeft(xs: Lizt<A>): Int =
             foldLeft(xs, 0) { b, _ -> b + 1 }
+
+        // 3.11
+        // List [[1, 2], 3]
+        // xs: List [1, 2] -> List 2, 3, nil, f(nil, 1)
+        // z: List[1, nil]
+        // z: List[2, 1, nil]
+        fun <A>reverse(xs: Lizt<A>): Lizt<A> =
+            foldLeft(xs, empty()) { b, a ->  Cons(a, b) }
+
+        // 3.13
+        fun <A>appendRight(xs: Lizt<A>, x: A): Lizt<A> =
+            foldRight(xs, Cons(x, Nil)) { a, b -> Cons(a, b)}
+
+        fun <A>concat(xs: Lizt<A>, zs: Lizt<A>): Lizt<A> =
+            foldRight(xs, zs) { a, b -> Cons(a, b)}
+
+
+        // todo!!
+        fun <A>appendLeft(xs: Lizt<A>, x: A): Lizt<A> =
+            foldLeft(xs, empty()) { b, a -> concat(b, Cons(a, Nil)) }
     }
 }
 
