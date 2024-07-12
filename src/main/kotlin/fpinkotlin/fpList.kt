@@ -103,9 +103,17 @@ sealed class Lizt<out A> {
             foldRight(xs, zs) { a, b -> Cons(a, b)}
 
 
-        // todo!!
+        // tried this and it's not possible!
         fun <A>appendLeft(xs: Lizt<A>, x: A): Lizt<A> =
-            foldLeft(xs, empty()) { b, a -> concat(b, Cons(a, Nil)) }
+            foldLeft(xs,  empty()) { b, a -> concat(b, Cons(a, Nil)) }
+
+        // 3.14
+        fun <A>flatten(xsLists: Lizt<Lizt<A>>): Lizt<A> =
+            foldRight(xsLists, empty()) { a, b -> concat(a, b)}
+
+        // 3.15
+        fun transformOne(xs: Lizt<Int>): Lizt<Int> = foldRight(xs, empty()) { a, b -> Cons(a + 1, b)}
+
     }
 }
 
@@ -116,6 +124,10 @@ sealed class Lizt<out A> {
 //         is Cons -> lizt.tail
 //     }
 
-object Nil : Lizt<Nothing>()
+object Nil : Lizt<Nothing>() {
+    override fun toString(): String = ""
+}
 
-data class Cons<out A>(val head: A, val tail: Lizt<A>) : Lizt<A>()
+data class Cons<out A>(val head: A, val tail: Lizt<A>) : Lizt<A>() {
+    override fun toString(): String = "${head}, ${tail}"
+}
