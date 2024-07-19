@@ -104,15 +104,43 @@ sealed class Lizt<out A> {
 
 
         // tried this and it's not possible!
-        fun <A>appendLeft(xs: Lizt<A>, x: A): Lizt<A> =
-            foldLeft(xs,  empty()) { b, a -> concat(b, Cons(a, Nil)) }
+        // fun <A>appendLeft(xs: Lizt<A>, x: A): Lizt<A> =
+        //     foldLeft(xs,  empty()) { b, a -> concat(b, Cons(a, Nil)) }
 
         // 3.14
         fun <A>flatten(xsLists: Lizt<Lizt<A>>): Lizt<A> =
             foldRight(xsLists, empty()) { a, b -> concat(a, b)}
 
         // 3.15
-        fun transformOne(xs: Lizt<Int>): Lizt<Int> = foldRight(xs, empty()) { a, b -> Cons(a + 1, b)}
+        fun transformOne(xs: Lizt<Int>): Lizt<Int> =
+            foldRight(xs, empty()) { a, b -> Cons(a + 1, b)}
+
+        // 3.16
+        fun doubleToString(ds: Lizt<Double>): Lizt<String> =
+            foldRight(ds, empty()) { a, b -> Cons(a.toString() + "!!", b) }
+
+        // 3.17
+        fun <A, B> map(xs: Lizt<A>, f: (A) -> B): Lizt<B> =
+            foldRight(xs, empty()) { a, b -> Cons(f(a), b) }
+
+        // 3.18
+        fun <A> filter(xs: Lizt<A>, f: (A) -> Boolean): Lizt<A> =
+            foldRight(xs, empty()) { a, b ->
+                when (f(a)) {
+                    true -> Cons(a, b)
+                    false -> b
+                }
+            }
+
+        // 3.19
+        fun <A, B> flatMap(xa: Lizt<A>, f: (A) -> Lizt<B>): Lizt<B> =
+            foldRight(xa, empty()) { a, b ->
+                val result: Lizt<B> = f(a)
+                concat(result, b)
+            }
+
+        // 3.20
+        // flatMapInTermsOfFilter
 
     }
 }

@@ -24,4 +24,9 @@ fun main() {
     println(Lizt.concat(Lizt.of<Double>(1.0, 2.0, 3.0), Lizt.of<Double>(4.0, 5.0)))
     println(Lizt.flatten(Lizt.of(Lizt.of<Double>(1.0, 2.0, 3.0), Lizt.of<Double>(4.0, 5.0, 6.0))))
     println(Lizt.transformOne(Lizt.of(1, 2, 3)))
+    println(Lizt.doubleToString(Lizt.of(1.0, 2.0, 3.0)))
+    println(Lizt.map(words) { word -> word + "?" })
+    println(Lizt.map(ints) { num -> num + 10 })
+    println(Lizt.filter(ints) { num -> num % 2 == 0 })
+    println(Lizt.flatMap(Lizt.of(1, 2, 3)) { i -> Lizt.of(i, i) })
 }
