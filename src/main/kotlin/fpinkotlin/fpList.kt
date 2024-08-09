@@ -117,7 +117,7 @@ sealed class Lizt<out A> {
 
         // 3.16
         fun doubleToString(ds: Lizt<Double>): Lizt<String> =
-            foldRight(ds, empty()) { a, b -> Cons(a.toString() + "!!", b) }
+            foldRight(ds, empty()) { a, b -> Cons("$a!!", b) }
 
         // 3.17
         fun <A, B> map(xs: Lizt<A>, f: (A) -> B): Lizt<B> =
@@ -140,8 +140,35 @@ sealed class Lizt<out A> {
             }
 
         // 3.20
-        // flatMapInTermsOfFilter
+        fun <A> filterUsingFlatmap(xs: Lizt<A>, f: (A) -> Boolean): Lizt<A> =
+            flatMap(xs) { x ->
+                when (f(x)) {
+                    true -> Cons(x, empty())
+                    false -> empty()
+                }}
 
+        // 3.21
+        fun zipAndAdd(xs1: Lizt<Int>, xs2: Lizt<Int>): Lizt<Int> =
+            when (xs1) {
+                is Nil -> empty()
+                is Cons -> when (xs2) {
+                    is Nil -> empty()
+                    is Cons -> Cons(xs1.head + xs2.head, zipAndAdd(xs1.tail, xs2.tail))
+                }
+            }
+//        fun zipAndAdd(xs1: Lizt<Int>, xs2: Lizt<Int>): Lizt<Int> {
+//            val pair = (Pair(xs1, xs2))
+//            when (pair) {
+//                pair.first -> empty()
+//                pair.second -> empty()
+//                else
+//                is Cons -> when (xs2) {
+//                    is Nil -> empty()
+//                    is Cons -> Cons(xs1.head + xs2.head, zipAndAdd(xs1.tail, xs2.tail))
+//                }
+//            }
+//        }
+        // [[1, 2, 3], [4, 5, 6]]
     }
 }
 
