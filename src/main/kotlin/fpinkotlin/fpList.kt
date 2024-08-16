@@ -169,7 +169,18 @@ sealed class Lizt<out A> {
 //            }
 //        }
         // [[1, 2, 3], [4, 5, 6]]
+
+        // 3.22
+        fun <A, B, C> zipWith(xs1: Lizt<A>, xs2: Lizt<B>, f: (A, B) -> C): Lizt<C> =
+            when (xs1) {
+                is Nil -> empty()
+                is Cons -> when (xs2) {
+                    is Nil -> empty()
+                    is Cons -> Cons(f(xs1.head, xs2.head), zipWith(xs1.tail, xs2.tail, f))
+                }
+            }
     }
+
 }
 
 // 3.1

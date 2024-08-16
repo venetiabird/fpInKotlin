@@ -31,4 +31,9 @@ fun main() {
     println(Lizt.flatMap(Lizt.of(1, 2, 3)) { i -> Lizt.of(i, i) })
     println(Lizt.filterUsingFlatmap(ints) { num -> num % 2 == 0 })
     println(Lizt.zipAndAdd(Lizt.of(1, 4, 7, 2, 6), ints))
+    println(Lizt.zipWith(Lizt.of(1, 4, 7, 2, 6), ints) {x, y -> x-y })
+    println(Lizt.zipWith(Lizt.of("A", "B", "C", "D", "D"), ints) {x, y -> x+y })
+    println(Lizt.zipWith(Lizt.of("A", "B", "C", "D", "D"), ints) {x, y -> "$x -> $y" })
+
+//    val list = java.util.List()
 }
