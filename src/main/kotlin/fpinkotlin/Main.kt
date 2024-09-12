@@ -34,6 +34,11 @@ fun main() {
     println(Lizt.zipWith(Lizt.of(1, 4, 7, 2, 6), ints) {x, y -> x-y })
     println(Lizt.zipWith(Lizt.of("A", "B", "C", "D", "D"), ints) {x, y -> x+y })
     println(Lizt.zipWith(Lizt.of("A", "B", "C", "D", "D"), ints) {x, y -> "$x -> $y" })
+    println(words.slice())
+    println(words.slice(2))
+    println(Lizt.hasSubsequence(words, Lizt.of("apple", "banana")))
+    println(words.equals(Lizt.of("apple", "banana", "strawberry", "peach")))
+
 
 //    val list = java.util.List()
 }

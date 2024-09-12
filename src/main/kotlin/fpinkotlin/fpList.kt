@@ -179,6 +179,32 @@ sealed class Lizt<out A> {
                     is Cons -> Cons(f(xs1.head, xs2.head), zipWith(xs1.tail, xs2.tail, f))
                 }
             }
+
+        tailrec fun <A> hasSubsequence(xs: Lizt<A>, sub: Lizt<A>): Boolean {
+            // [1, 2, 3, 4]
+            // easy [1, 2] or [2]
+            // hard [2, 3]
+            val subsize  = length(sub)
+            val xsSub = xs.slice(subsize)
+            return xsSub == sub
+            // TODO: complete for other items
+        }
+    }
+
+}
+
+fun <A>Lizt<A>.slice(end: Int = Lizt.length(this)) : Lizt<A> {
+    return when(this) {
+        is Cons -> {
+            if (end == 0) {
+                Nil
+            } else {
+                Cons(this.head, this.tail.slice(end-1))
+            }
+        }
+        else -> {
+            Nil
+        }
     }
 
 }
