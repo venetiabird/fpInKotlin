@@ -181,13 +181,17 @@ sealed class Lizt<out A> {
             }
 
         tailrec fun <A> hasSubsequence(xs: Lizt<A>, sub: Lizt<A>): Boolean {
-            // [1, 2, 3, 4]
-            // easy [1, 2] or [2]
-            // hard [2, 3]
-            val subsize  = length(sub)
-            val xsSub = xs.slice(subsize)
-            return xsSub == sub
-            // TODO: complete for other items
+            when (xs) {
+                is Nil -> return false
+                is Cons -> {
+                    val subsize  = length(sub) // 2
+                    val xsSub = xs.slice(subsize) // first 2 items in the larger list
+                    if (xsSub == sub) {
+                        return true;
+                    }
+                    return hasSubsequence(xs.tail, sub)
+                }
+            }
         }
     }
 
@@ -206,7 +210,6 @@ fun <A>Lizt<A>.slice(end: Int = Lizt.length(this)) : Lizt<A> {
             Nil
         }
     }
-
 }
 
 // 3.1

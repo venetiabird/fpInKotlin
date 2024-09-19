@@ -36,9 +36,27 @@ fun main() {
     println(Lizt.zipWith(Lizt.of("A", "B", "C", "D", "D"), ints) {x, y -> "$x -> $y" })
     println(words.slice())
     println(words.slice(2))
-    println(Lizt.hasSubsequence(words, Lizt.of("apple", "banana")))
     println(words.equals(Lizt.of("apple", "banana", "strawberry", "peach")))
+    println(Lizt.hasSubsequence(words, Lizt.of("banana", "peach")))
+    println(Lizt.hasSubsequence(ints, Lizt.of(7, 2, 6, 8)))
+    println(Lizt.hasSubsequence(ints, Lizt.of()))
 
+    val tree = Branch(
+        Branch(
+            Leaf(3),
+            Leaf(32),
+        ),
+        Branch(
+            Branch(
+                Leaf(-1),
+                Branch(
+                    Leaf(11),
+                    Leaf(30),
+                ),
+            ),
+            Leaf(99),
+        ),
+    )
 
-//    val list = java.util.List()
+    println(tree.size())
 }
