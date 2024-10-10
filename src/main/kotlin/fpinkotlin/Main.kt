@@ -41,22 +41,30 @@ fun main() {
     println(Lizt.hasSubsequence(ints, Lizt.of(7, 2, 6, 8)))
     println(Lizt.hasSubsequence(ints, Lizt.of()))
 
-    val tree = Branch(
+    val tree =
         Branch(
-            Leaf(3),
-            Leaf(32),
-        ),
-        Branch(
-            Branch(
-                Leaf(-1),
-                Branch(
-                    Leaf(11),
-                    Leaf(30),
-                ),
+            Branch( // 1
+                Leaf(3),
+                Leaf(302),
             ),
-            Leaf(99),
-        ),
+            Branch(
+                Branch(
+                    Leaf(-1),
+                    Branch(
+                        Branch(
+                            Leaf(11),
+                            Leaf(90)),
+                        Leaf(101),
+                    ),
+                ),
+                Leaf(99),
+            ),
     )
 
     println(tree.size())
+
+    println(Tree.maximum(tree))
+    println(Tree.depth(tree))
+    println(tree.map { x -> x + 1 })
 }
+
