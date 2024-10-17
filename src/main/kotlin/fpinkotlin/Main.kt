@@ -61,10 +61,22 @@ fun main() {
             ),
     )
 
+
+    println(Tree.fold(
+        tree,
+        { x: Int -> x.toString() },
+        { b1, b2 -> b1 + b2}
+    ))
     println(tree.size())
+    println(Tree.sizeF(tree))
 
     println(Tree.maximum(tree))
+    println(Tree.maximumF(tree))
+
     println(Tree.depth(tree))
+    println(Tree.depthF(tree))
+
     println(tree.map { x -> x + 1 })
+    println(Tree.mapF(tree) { x -> x + 1 })
 }
 
