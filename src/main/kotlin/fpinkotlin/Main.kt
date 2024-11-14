@@ -1,5 +1,7 @@
 package fpinkotlin
 
+import fpinkotlin.Option.Companion.map
+
 fun main() {
     val words = Lizt.of("apple", "banana", "strawberry", "peach")
     val ints = Lizt.of(1, 4, 7, 2, 6, 8)
@@ -78,5 +80,13 @@ fun main() {
 
     println(tree.map { x -> x + 1 })
     println(Tree.mapF(tree) { x -> x + 1 })
+
+    val someValue: Option<Int> = Some(5)
+    val noneValue: Option<None> = None
+
+    println(someValue.map { double(it) })
+//    println(noneValue.map { double() })
 }
+
+fun double(x: Int): Int = x * 2
 
