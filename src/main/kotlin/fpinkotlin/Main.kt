@@ -1,6 +1,9 @@
 package fpinkotlin
 
+import fpinkotlin.Option.Companion.flatMap
+import fpinkotlin.Option.Companion.getOrElse
 import fpinkotlin.Option.Companion.map
+import fpinkotlin.Option.Companion.orElse
 
 fun main() {
     val words = Lizt.of("apple", "banana", "strawberry", "peach")
@@ -82,10 +85,17 @@ fun main() {
     println(Tree.mapF(tree) { x -> x + 1 })
 
     val someValue: Option<Int> = Some(5)
-    val noneValue: Option<None> = None
+    val noneValue: Option<Int> = None
 
     println(someValue.map { double(it) })
 //    println(noneValue.map { double() })
+    println(someValue.flatMap { v -> Some(v + 1) })
+    println(noneValue.getOrElse { 99 })
+    println(someValue.getOrElse { 99 })
+    println(someValue.orElse { Some(3) }) // Some(5)
+    println(someValue.orElse { None }) // Some(5)
+    println(noneValue.orElse { Some(3) }) // Some(3)
+    println(noneValue.orElse { None }) // None
 }
 
 fun double(x: Int): Int = x * 2
