@@ -30,6 +30,15 @@ sealed class Option<out A> {
                 is None -> ob()
                 is Some -> this
             }
+
+        fun <A> Option<A>.filterWithMatch(f: (A) -> Boolean): Option<A> =
+            when (this) {
+                is None -> None
+                is Some -> if(f(this.get)) this else None
+            }
+
+        fun <A> Option<A>.filter(f: (A) -> Boolean): Option<A> =
+            this.flatMap { a -> if(f(a)) Some(a) else None }
         // Can't figure out if this is possible to implement orElse without pattern matching
 //        fun <A> Option<A>.orElseWithoutMatch(ob: () -> Option<A>): Option<A> {
 //
