@@ -102,6 +102,7 @@ fun main() {
     println(someValue.filterWithMatch { it == 5 })
     println(someValue.filter { it == 2 })
     println(someValue.filter { it == 5 })
+    println(Option.map2(noneValue, someValue) { a, b -> b - a })
 }
 
 fun double(x: Int): Int = x * 2

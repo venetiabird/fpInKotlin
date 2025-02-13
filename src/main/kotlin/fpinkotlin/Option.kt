@@ -39,20 +39,50 @@ sealed class Option<out A> {
 
         fun <A> Option<A>.filter(f: (A) -> Boolean): Option<A> =
             this.flatMap { a -> if(f(a)) Some(a) else None }
-        // Can't figure out if this is possible to implement orElse without pattern matching
-//        fun <A> Option<A>.orElseWithoutMatch(ob: () -> Option<A>): Option<A> {
-//
-//            val result = this.getOrElse {
-//                val maybeA = ob()
-//                maybeA
-//            }
-//
-//            return Some(result)
-//        }
+
+        fun <A, B> lift(f: (A) -> B): (Option<A>) -> Option<B> =
+            fun(oa: Option<A>): Option<B> = oa.map(f)
+
+        fun insuranceRateQuote(
+            age: Int,
+            numberOfSpeedingTickets: Int
+        ): Double = TODO()
+
+        fun parseInsuranceRateQuote(
+            age: String,
+            speedingTickets: String
+        ): Option<Double> {
+            val optAge: Option<Int> = catches { age.toInt() }
+            val optTickets: Option<Int> =
+            catches { speedingTickets.toInt() }
+            return map2(optAge, optTickets) { a, t ->
+                insuranceRateQuote(a, t)
+            }
+        }
+
+        fun <A> catches(a: () -> A): Option<A> =
+            try {
+                Some(a())
+            } catch (e: Throwable) {
+                None
+            }
+
+        fun <A, B, C> map2(oa: Option<A>, ob: Option<B>, f: (A, B) -> C): Option<C> =
+            oa.flatMap { a ->
+                ob.map { b -> f(a, b) }
+            }
+
+        fun <A> sequence(xs: Lizt<Option<A>>): Option<Lizt<A>> =
+            foldLeft(xs, Some(Nil as Lizt<A>)) { ob: Option<Lizt<A>>, oa: Option<A> ->
+                // map over the option, and join to the list
+                oa.flatMap { a -> a }
+            }
     }
 }
 
 data class Some<out A>(val get: A) : Option<A>()
-object None : Option<Nothing>()
+object None : Option<Nothing>() {
+    override fun toString(): String = "None"
+}
 
 
