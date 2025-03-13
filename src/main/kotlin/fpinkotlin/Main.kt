@@ -2,10 +2,10 @@ package fpinkotlin
 
 import fpinkotlin.Option.Companion.filter
 import fpinkotlin.Option.Companion.filterWithMatch
-import fpinkotlin.Option.Companion.flatMap
-import fpinkotlin.Option.Companion.getOrElse
-import fpinkotlin.Option.Companion.map
-import fpinkotlin.Option.Companion.orElse
+//import fpinkotlin.Option.Companion.flatMap
+//import fpinkotlin.Option.Companion.getOrElse
+//import fpinkotlin.Option.Companion.map
+//import fpinkotlin.Option.Companion.orElse
 
 fun main() {
     val words = Lizt.of("apple", "banana", "strawberry", "peach")
@@ -98,11 +98,12 @@ fun main() {
 //    println(someValue.orElse { None }) // Some(5)
 //    println(noneValue.orElse { Some(3) }) // Some(3)
 //    println(noneValue.orElse { None }) // None
-    println(someValue.filterWithMatch { it == 2 })
-    println(someValue.filterWithMatch { it == 5 })
-    println(someValue.filter { it == 2 })
-    println(someValue.filter { it == 5 })
-    println(Option.map2(noneValue, someValue) { a, b -> b - a })
+//    println(someValue.filterWithMatch { it == 2 })
+//    println(someValue.filterWithMatch { it == 5 })
+//    println(someValue.filter { it == 2 })
+//    println(someValue.filter { it == 5 })
+//    println(Option.map2(noneValue, someValue) { a, b -> b - a })
+    println(Option.sequence(Lizt.of(someValue, someValue, someValue)))
 }
 
 fun double(x: Int): Int = x * 2

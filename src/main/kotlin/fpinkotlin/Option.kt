@@ -67,16 +67,20 @@ sealed class Option<out A> {
                 None
             }
 
+        // Ex 4.3
         fun <A, B, C> map2(oa: Option<A>, ob: Option<B>, f: (A, B) -> C): Option<C> =
             oa.flatMap { a ->
                 ob.map { b -> f(a, b) }
             }
 
+        // Ex 4.4
         fun <A> sequence(xs: Lizt<Option<A>>): Option<Lizt<A>> =
-            foldLeft(xs, Some(Nil as Lizt<A>)) { ob: Option<Lizt<A>>, oa: Option<A> ->
+            Lizt.foldLeft(xs, Some(Nil as Lizt<A>)) { ob: Option<Lizt<A>>, oa: Option<A> ->
                 // map over the option, and join to the list
-                oa.flatMap { a -> a }
+                map2(oa, ob) { a, aas -> Lizt.appendRight(aas, a)}
             }
+
+        // Ex 4.5
     }
 }
 
