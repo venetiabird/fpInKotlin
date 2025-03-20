@@ -103,7 +103,9 @@ fun main() {
 //    println(someValue.filter { it == 2 })
 //    println(someValue.filter { it == 5 })
 //    println(Option.map2(noneValue, someValue) { a, b -> b - a })
-    println(Option.sequence(Lizt.of(someValue, someValue, someValue)))
+    println(Option.sequence(Lizt.of(noneValue, someValue, someValue)))
+    println(Option.traverse(Lizt.of(3, 5, 7)) { x -> if (x == 9) None else Some(x + 1) })
+    println(Option.traverse(Lizt.of(3, 5, 9, 7)) { x -> if (x == 9) None else Some(x + 1) })
 }
 
 fun double(x: Int): Int = x * 2

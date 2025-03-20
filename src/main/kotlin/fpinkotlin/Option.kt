@@ -81,6 +81,21 @@ sealed class Option<out A> {
             }
 
         // Ex 4.5
+        fun <A, B> traverse(
+            xa: Lizt<A>,
+            f: (A) -> Option<B>
+        ): Option<Lizt<B>> =
+            Lizt.foldLeft(xa, Some(Nil) as Option<Lizt<B>>, { ob, a: A ->
+                when (ob) {
+                    is None -> None
+                    is Some -> {
+                        when (val optionB = f(a)) {
+                            is None -> None
+                            is Some -> Some(Lizt.appendRight(ob.get, optionB.get))
+                        }
+                    }
+                }
+            })
     }
 }
 
