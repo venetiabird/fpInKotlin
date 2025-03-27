@@ -85,7 +85,7 @@ sealed class Option<out A> {
             xa: Lizt<A>,
             f: (A) -> Option<B>
         ): Option<Lizt<B>> =
-            Lizt.foldLeft(xa, Some(Nil) as Option<Lizt<B>>, { ob, a: A ->
+            Lizt.foldLeft(xa, Some(Nil) as Option<Lizt<B>>) { ob, a: A ->
                 when (ob) {
                     is None -> None
                     is Some -> {
@@ -95,7 +95,7 @@ sealed class Option<out A> {
                         }
                     }
                 }
-            })
+            }
     }
 }
 
