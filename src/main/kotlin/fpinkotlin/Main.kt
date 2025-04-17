@@ -109,6 +109,16 @@ fun main() {
 
     val right: Either<List<Int>, List<Int>> = Right(listOf(5,8))
     println(right.map { it.map { it * 2 } })
+
+    val e: Either<String, String> = Right("Hello")
+    // val result = e.flatMap { s -> if (s === "Bad") Left("Bad string") else Right(s) }
+    // println(result)
+
+    fun unsure(n: Int): Either<String, Int> =
+        if (n < 0) Left("Cannot be negative") else Right(n)
+
+    val result = unsure(-7).orElse { Right(10) }
+    println(result)
 }
 
 fun double(x: Int): Int = x * 2
