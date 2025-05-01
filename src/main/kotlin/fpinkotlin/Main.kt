@@ -119,6 +119,11 @@ fun main() {
 
     val result = unsure(-7).orElse { Right(10) }
     println(result)
+
+    val ae: Either<Int, Int> = Right(5)
+    val be: Either<Int, Int> = Right(9)
+
+    println(Either.map2(ae, be) { a, b -> a + b  } )
 }
 
 fun double(x: Int): Int = x * 2

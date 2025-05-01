@@ -13,6 +13,33 @@ sealed class Either<out E, out A> {
             } catch (e: Exception) {
                 Left(e)
             }
+
+        fun <E, A, B, C> map2(
+            ae: Either<E, A>,
+            be: Either<E, B>,
+            f: (A, B) -> C
+        ): Either<E, C> =
+//            when(ae) {
+//                is Left -> ae
+//                is Right -> be.map { b -> f(ae.value, b) }
+//            }
+            ae.flatMap { a ->
+                be.map { b ->
+                    f(a, b)}
+            }
+//            when(ae) {
+//                is Left -> ae
+//                is Right -> when(be) {
+//                    is Left -> be
+//                    is Right -> Right(f(ae.value, be.value))
+//                }
+//            }
+
+        // TDOO: Pat 7 May
+        fun <A, B> traverse(
+            xa: Lizt<A>,
+            f: (A) -> Option<B>
+        ): Option<Lizt<B>> =TODO()
     }
 }
 
@@ -37,3 +64,4 @@ fun <E, A> Either<E, A>.orElse(f: () -> Either<E, A>): Either<E, A> =
          is Left -> f()
          is Right -> this
      }
+
