@@ -35,11 +35,20 @@ sealed class Either<out E, out A> {
 //                }
 //            }
 
-        // TDOO: Pat 7 May
-        fun <A, B> traverse(
+        fun <A, B, E> traverse(
             xa: Lizt<A>,
-            f: (A) -> Option<B>
-        ): Option<Lizt<B>> =TODO()
+            f: (A) -> Either<E, B>
+        ): Either<E, Lizt<B>> {
+            val result = Lizt.foldLeft(xa, Right(Nil) as Either<E, Lizt<B>>) { acc, a ->
+                acc.flatMap { list ->
+                    val x = f(a)
+                    x.map { b -> Lizt.appendRight(list, b) }
+                }
+
+            }
+
+            return result
+        }
     }
 }
 

@@ -124,6 +124,15 @@ fun main() {
     val be: Either<Int, Int> = Right(9)
 
     println(Either.map2(ae, be) { a, b -> a + b  } )
+
+    val result2: Either<String, Lizt<Int>> = Either.traverse(ints) { int ->
+        if (int < 0) {
+            Left("Too low")
+        } else {
+            Right(int + 1)
+        }
+    }
+    println(result2)
 }
 
 fun double(x: Int): Int = x * 2
